@@ -1,12 +1,33 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {NavigationContainer} from '@react-navigation/native';
+import HomeStacks from './src/navigations/HomeStacks';
+import ProfileStacks from './src/navigations/ProfileStacks';
+import { Feather } from '@expo/vector-icons'; 
 
 export default function App() {
+  const Tab = createBottomTabNavigator();
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name='Home' component={HomeStacks} options={{headerShown:false, 
+        tabBarIcon: ()=>{
+              return (
+                <Feather name="home" size={24} color="black" />
+              )
+            }
+            }} />
+        <Tab.Screen name='Profile' component={ProfileStacks} options={{headerShown:false,
+          tabBarIcon: ()=>{
+              return (
+                <Feather name="user" size={24} color="black" />
+              )
+            }
+        }} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
 
